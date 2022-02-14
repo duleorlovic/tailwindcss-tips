@@ -1,24 +1,55 @@
-# README
+# Tailwind Tips
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+You can start designing with https://tailwindcss.com/ with livereload just like
+on their landing page.
 
-Things you may want to cover:
+## Install
 
-* Ruby version
+Start we `-j` and `--css` options on `rails new` command
+```
+rails new tailwind_livereload -j esbuild --css tailwind
+cd tailwind_livereload
+```
+Than add build scripts to package.json
+```
+# package.json
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
+  },
+```
+Than create sample page
+```
+rails g controller pages index --no-helper --no-test
 
-* System dependencies
+# config/routes.rb
+  root 'pages#index'
+```
 
-* Configuration
+Install livereload
 
-* Database creation
+```
+# Gemfile
+group :development do
+  gem "hotwire-livereload"
+end
 
-* Database initialization
+# this will enable some options
+rails livereload:install
 
-* How to run the test suite
+# config/environments/development.rb
+config.hotwire_livereload.listen_paths << Rails.root.join("app/assets/builds")
+```
+You do not need any extension or add-on for firefox chrome safari.
 
-* Services (job queues, cache servers, search engines, etc.)
+Autosorting classes using prettier is performed using Coc
+https://github.com/iamcco/coc-tailwindcss
+```
+:CocInstall coc-tailwindcss
+```
 
-* Deployment instructions
 
-* ...
+# Features
+
+Whats new in v3.0 https://www.youtube.com/watch?v=mSC6GwizOag
+* 
