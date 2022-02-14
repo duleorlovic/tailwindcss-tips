@@ -13,7 +13,46 @@
     <% end %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class='h-screen'>
+    <div class='flex h-1/2'>
+      <iframe class='flex-none border w-[28rem] bg-slate-50' srcDoc='
+        <html>
+          <head>
+            <title>TailwindcssTips</title>
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+            <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+            <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+          </head>
+
+          <body>
+            <%= yield.gsub("'", "\'") %>
+          </body>
+        </html>
+        '>
+      </iframe>
+      <div class='flex-1 border'>
+        <%= yield %>
+      </div>
+    </div>
+    <div class='flex dark h-1/2'>
+      <iframe class='flex-none border w-[28rem]' srcDoc='
+        <html>
+          <head>
+            <title>TailwindcssTips</title>
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+            <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+            <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+          </head>
+
+          <body class="bg-black dark">
+            <%= yield.gsub("'", "\'") %>
+          </body>
+        </html>
+        '>
+      </iframe>
+      <div class='flex-1 bg-black border'>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
