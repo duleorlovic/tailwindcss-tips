@@ -109,10 +109,14 @@ on parent element
 ```
 or using system settings.
 
+Add custom style
+TODO https://tailwindcss.com/docs/adding-custom-styles
 
 ## Whats new in v3.0
 
 https://www.youtube.com/watch?v=mSC6GwizOag
+
+TODO rebuild ios https://www.youtube.com/watch?v=eSzNNYk7nVU
 
 # Todo
 
