@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  rails:
+    environment:
+      REDIS_URL: "redis://redis:6379/1"
+    build: .
+    volumes:
+      - .:/myapp
+      - /myapp/node_modules # ignore platform specific node_modules
+    command: rails s -b 0.0.0.0
+    ports:
+      - '3000:3000'
+    depends_on:
+      - redis
+  esbuild:
+    build: .
+    volumes:
+      - .:/myapp
+      - /myapp/node_modules # ignore platform specific node_modules
+    command: yarn build --watch
+    stdin_open: true # https://stackoverflow.com/a/62604664/287166
+  tailwind:
+    build: .
+    volumes:
+      - .:/myapp
+      - /myapp/node_modules # ignore platform specific node_modules
+    command: yarn build:css --watch
+    stdin_open: true # https://stackoverflow.com/a/62604664/287166
+  redis:
+    image: 'redis:4.0-alpine'
+    volumes:
+      - ./tmp/redis:/data

@@ -67,6 +67,12 @@ The asset "application.css" is not present in the asset pipeline.
 ```
 it is probably that you run the app using `rails s` command
 
+You can also run with
+```
+docker-compose up
+docker-compose down
+```
+
 # Core concepts
 
 https://tailwindcss.com/docs/responsive-design/
